@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.js To-do List Demo</title>
+    <!-- 引入本地样式表 -->
+    <link rel="stylesheet" href="./static/css/style.css">
+    <!-- 引入fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <!-- To do : add transition animate -->
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="page-header">
+        <h1>Vue.js To-do List Demo</h1>
+    </header>
+
+    <!-- Main Container -->
+    <div class="page-main" id="app">
+        <todo-list></todo-list>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+        <p>Built by <a href="https://github.com/b1naryan" target="_blank">Ryan Yang</a>.</p>
+        <p>Open source on <a href="https://github.com/b1naryan/ToDoList---Vue" target="_blank">Github</a>.</p>
+    </footer>
+
+    <!-- Vue Template -->
+    <template id="todo-list-template">
+        <div>
+            <!-- input输入框 -->
+            <input type="text" class="todo-input" placeholder="Press enter to add something to do ..." v-model="newTask.text"
+                @keypress.enter="addNewTask">
+            <hr>
+            <!-- show remaining & clear all -->
+            <div class="tool-row">
+                <small>
+                    <i class="fa fa-tasks"></i>
+                    <span>&nbsp;{{remainTaskCount}} Remaining Task<span v-show="remainTaskCount>1?true:false">s</span>
+                        of {{totalTasks.length}} Total Task<span v-show="totalTasks.length>1?true:false">s</span></span>
+                </small>
+                <small class="clear-all" @click.prevent="clearAllTasks">
+                    <span>Clear all&nbsp;</span><i class="fa fa-retweet"></i>
+                </small>
+            </div>
+            <hr>
+            <!-- task container -->
+            <div class="task-container">
+                <div v-for="(task,index) in totalTasks" :key="index" class="single-task">
+                    <span @click="markDone(task)">
+                        <i class="fa fa-circle-o fa-lg pointer" aria-hidden="true" v-show="task.isdone==false?true:false"></i>
+                        <i class="fa fa-check-circle-o fa-lg pointer" aria-hidden="true" v-show="task.isdone==false?false:true"
+                            style="color:#00bc8c"></i>
+                        <span :class="task.isdone==false?'':'task-done'" style="padding-left:10px">{{task.text}}</span>
+                    </span>
+                    <span class="clear-all" @click="removeTask(task,index)">
+                        <i class="fa fa-minus-square-o fa-lg" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 引入vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入本地app.js -->
+    <script src="./static/js/app.js"></script>
+</body>
+
+</html>
