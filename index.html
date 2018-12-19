@@ -11,7 +11,8 @@
     <!-- 引入fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
-    <!-- To do : add transition animate -->
+    <!-- 引入animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 </head>
 
 <body>
@@ -53,7 +54,7 @@
             <hr>
             <!-- task container -->
             <div class="task-container">
-                <div v-for="(task,index) in totalTasks" :key="index" class="single-task">
+                <div v-for="(task,index) in totalTasks" :key="index" class="single-task animated fadeIn">
                     <span @click="markDone(task)">
                         <i class="fa fa-circle-o fa-lg pointer" aria-hidden="true" v-show="task.isdone==false?true:false"></i>
                         <i class="fa fa-check-circle-o fa-lg pointer" aria-hidden="true" v-show="task.isdone==false?false:true"
