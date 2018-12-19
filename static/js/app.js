@@ -10,7 +10,10 @@ Vue.component("todo-list", {
             totalTasks: []
         }
     },
-    created() { },
+    created() {
+        this.remainTaskCount = JSON.parse(localStorage.getItem('remain')) || 0;
+        this.totalTasks = JSON.parse(localStorage.getItem('total')) || [];
+    },
     methods: {
         addNewTask() {
             this.totalTasks.push(this.newTask);
@@ -36,7 +39,18 @@ Vue.component("todo-list", {
         }
     },
     watch: {
-        //To do : set data to localStorage
+        remainTaskCount: {
+            handler: function (val) {
+                localStorage.setItem('remain', JSON.stringify(val));
+            },
+            deep: true
+        },
+        totalTasks: {
+            handler: function (val) {
+                localStorage.setItem('total', JSON.stringify(val));
+            },
+            deep: true
+        }
     }
 })
 
